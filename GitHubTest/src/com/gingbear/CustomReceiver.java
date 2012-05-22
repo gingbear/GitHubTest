@@ -9,6 +9,8 @@ public class CustomReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		// TODO Auto-generated method stub
+		CustomLog.i("DEBUG", "---------- enter ----------");
+		CustomLog.i("DEBUG", "action: " + intent.getAction());
 		
 	}
 
