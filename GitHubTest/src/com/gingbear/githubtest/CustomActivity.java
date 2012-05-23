@@ -1,4 +1,4 @@
-package com.gingbear;
+package com.gingbear.githubtest;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
