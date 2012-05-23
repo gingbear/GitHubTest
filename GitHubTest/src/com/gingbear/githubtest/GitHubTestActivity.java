@@ -1,4 +1,4 @@
-package com.gingbear;
+package com.gingbear.githubtest;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,6 +15,8 @@ public class GitHubTestActivity extends Activity {
         Intent intent = getIntent();
         if(intent != null){
             String str = intent.getStringExtra("test");
+			str += WifiChange.check(intent) + "\n";
+			str +=  WifiChange.change(this) + "\n";
             Toast.makeText(this, str, Toast.LENGTH_LONG).show();
         }
     }
