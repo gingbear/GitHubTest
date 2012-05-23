@@ -19,6 +19,7 @@ public class CustomReceiver extends BroadcastReceiver {
 //			intent.setClass(context, WifiChangeActivity.class);
 //			itnent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //			context.startActivity(itnent);
+			CustomLog.i("DEBUG", "WifiChange: " + WifiChange.check(intent));
 		}
 		// ネットワーク接続状態が変更されたら
 		if(action.equals(WifiManager.NETWORK_STATE_CHANGED_ACTION)){
