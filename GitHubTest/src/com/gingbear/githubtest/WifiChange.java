@@ -43,7 +43,7 @@ public class WifiChange {
 //		if(action.equals(WifiManager.NETWORK_STATE_CHANGED_ACTION)){
 			ConnectivityManager cm = (ConnectivityManager)activity.getSystemService(Activity.CONNECTIVITY_SERVICE);
 			NetworkInfo ni = cm.getActiveNetworkInfo();
-			if((ni!=null) && (ni.isConnected() && (ni.getType() == ConnectivityManager.TYPE_WIFI))){
+			if((ni!=null) && (ni.isConnected())){
 				switch (ni.getType() ){
 				case ConnectivityManager.TYPE_WIFI:
 					return "1:TYPE_WIFI";
