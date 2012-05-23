@@ -34,13 +34,13 @@ public class WifiChange {
 					return "wifi error";
 			}
 //		}
-		return "non";
+//		return "non";
 	}
 	static public String change(Activity activity){
 		Intent intent = activity.getIntent();
-		String action = intent.getAction();
+//		String action = intent.getAction();
 		// BroadcastReceiver がネットワークへの接続を検知して起動されたら
-		if(action.equals(WifiManager.NETWORK_STATE_CHANGED_ACTION)){
+//		if(action.equals(WifiManager.NETWORK_STATE_CHANGED_ACTION)){
 			ConnectivityManager cm = (ConnectivityManager)activity.getSystemService(Activity.CONNECTIVITY_SERVICE);
 			NetworkInfo ni = cm.getActiveNetworkInfo();
 			if((ni!=null) && (ni.isConnected() && (ni.getType() == ConnectivityManager.TYPE_WIFI))){
@@ -69,7 +69,7 @@ public class WifiChange {
 //				wifi.setWifiEnabled(false);
 				return "not connect";
 			}
-		}
-		return "non";
+//		}
+//		return "non";
 	}
 }
