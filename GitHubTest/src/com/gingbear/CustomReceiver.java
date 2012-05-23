@@ -10,7 +10,8 @@ public class CustomReceiver extends BroadcastReceiver {
 	public void onReceive(Context context, Intent intent) {
 		CustomLog.i("DEBUG", "---------- enter ----------");
 		CustomLog.i("DEBUG", "action: " + intent.getAction());
-		
+		CharSequence cs = intent.getExtras().getCharSequence(Intent.EXTRA_TEXT);
+	      
 	}
 
 }
