@@ -10,7 +10,7 @@ public class WifiChange {
 	static public String check(Intent intent){
 		String action = intent.getAction();
 		// BroadcastReceiver が Wifi の ON/OFF を検知して起動されたら
-		if(action.equals(WifiManager.WIFI_STATE_CHANGED_ACTION)){
+//		if(action.equals(WifiManager.WIFI_STATE_CHANGED_ACTION)){
 
 //			WifiManager wifi = (WifiManager)getSystemService(WIFI_SERVICE);
 //			// Wifi が ON になったら OFF
@@ -33,7 +33,7 @@ public class WifiChange {
 				default:
 					return "wifi error";
 			}
-		}
+//		}
 		return "non";
 	}
 	static public String change(Activity activity){
