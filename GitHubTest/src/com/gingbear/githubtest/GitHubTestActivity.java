@@ -1,11 +1,10 @@
 package com.gingbear.githubtest;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
-public class GitHubTestActivity extends Activity {
+public class GitHubTestActivity extends CustomActivity {
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -18,6 +17,7 @@ public class GitHubTestActivity extends Activity {
 			str += WifiChange.check(intent) + "\n";
 			str +=  WifiChange.change(this) + "\n";
             Toast.makeText(this, str, Toast.LENGTH_LONG).show();
+            setEditText(R.id.editText1,"key",str);
         }
     }
 }

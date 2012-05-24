@@ -45,10 +45,10 @@ public class CustomActivity extends Activity  {
 	 * @param key
 	 * @param initText
 	 */
-	private void setEditText(int editTextId, String key, String initText){
+	 void setEditText(int editTextId, String key, String initText){
 		SharedPreferences pref =getSharedPreferences("pref",MODE_WORLD_READABLE|MODE_WORLD_WRITEABLE);
-	EditText editText = (EditText)findViewById(editTextId);
-	editText.setText(pref.getString(key, initText));
+		EditText editText = (EditText)findViewById(editTextId);
+		editText.setText(pref.getString(key, initText));
 	}
 	/**
 	 * メタデータの取得
