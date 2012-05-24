@@ -4,8 +4,8 @@ import android.util.Log;
 
 public class CustomLog {
 
-	private static boolean debugLog = false;
-	private static boolean logOutput = false;
+	private static boolean debugLog = true;
+	private static boolean logOutput = true;
 
 	public static void setDebugLogging(boolean enable){
 		debugLog = enable;
