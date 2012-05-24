@@ -33,7 +33,14 @@ public class CustomReceiver extends BroadcastReceiver {
 			}else if(!networkInfo.isConnected()){
 			}
 		}
-	      
+		if (intent.getAction().equals(Intent.ACTION_POWER_CONNECTED)) {
+		} else if (intent.getAction().equals(Intent.ACTION_POWER_DISCONNECTED)) {
+		}
+		    
+		 if (action.equals(Intent.ACTION_BATTERY_CHANGED)) {
+			 int level = intent.getIntExtra("level", 0);
+			 if (level > 95) {}
+		 }
 	}
 
 }
