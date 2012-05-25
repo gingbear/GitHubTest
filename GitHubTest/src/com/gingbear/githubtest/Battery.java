@@ -5,27 +5,52 @@ import android.content.Intent;
 import android.os.BatteryManager;
 
 public class Battery {
-	public static String check(Intent intent){
-		int level = intent.getIntExtra("level", 0);
-		return level + "%";
-	}
+	
+	   private static Battery instance;
+	   private Battery(){}; 
+	   public static synchronized Battery getInstance(){
+	     if(instance == null){ 
+	       instance = new Battery();
+	     }
+	     return instance;
+	   }
+	   
+//	public static String check(Intent intent){
+//		int level = intent.getIntExtra("level", 0);
+//		return level + "%";
+//	}
+    int status = 0;
+
+	int health = 0;
+	boolean present = false;
+    int level = 0;
+    int scale = 0;
+    int icon_small = 0;
+    int plugged = 0;
+    int voltage = 0;
+    int temperature = 0;
+	private  String technology = "";
+	private  String statusString = "";
+	private  String healthString = "";
+	private  String acString = "";
+	private  StringBuilder sb = new StringBuilder();   
+	
 	
 	public String checkBattery(Context context, Intent intent) {
         String action = intent.getAction();
-        StringBuilder sb = new StringBuilder();   
         if (action.equals(Intent.ACTION_BATTERY_CHANGED)) {
-            int status = intent.getIntExtra("status", 0);
-            int health = intent.getIntExtra("health", 0);
-            boolean present = intent.getBooleanExtra("present", false);
-            int level = intent.getIntExtra("level", 0);
-            int scale = intent.getIntExtra("scale", 0);
-            int icon_small = intent.getIntExtra("icon-small", 0);
-            int plugged = intent.getIntExtra("plugged", 0);
-            int voltage = intent.getIntExtra("voltage", 0);
-            int temperature = intent.getIntExtra("temperature", 0);
-            String technology = intent.getStringExtra("technology");
+             status = intent.getIntExtra("status", 0);
+             health = intent.getIntExtra("health", 0);
+            present = intent.getBooleanExtra("present", false);
+             level = intent.getIntExtra("level", 0);
+             scale = intent.getIntExtra("scale", 0);
+             icon_small = intent.getIntExtra("icon-small", 0);
+             plugged = intent.getIntExtra("plugged", 0);
+            voltage = intent.getIntExtra("voltage", 0);
+             temperature = intent.getIntExtra("temperature", 0);
+            /*String*/ technology = intent.getStringExtra("technology");
             
-            String statusString = "";
+//            String statusString = "";
             
             switch (status) {
             case BatteryManager.BATTERY_STATUS_UNKNOWN:
@@ -45,7 +70,7 @@ public class Battery {
                 break;
             }
             
-            String healthString = "";
+//            String healthString = "";
             
             switch (health) {
             case BatteryManager.BATTERY_HEALTH_UNKNOWN:
@@ -68,7 +93,7 @@ public class Battery {
                 break;
             }
             
-            String acString = "";
+//            String acString = "";
             
             switch (plugged) {
             case BatteryManager.BATTERY_PLUGGED_AC:
@@ -102,4 +127,71 @@ public class Battery {
         }
         return sb.toString();
     }
+    
+	public int getStatus() {
+		return status;
+	}
+    public int getHealth() {
+		return health;
+	}
+
+
+	public boolean isPresent() {
+		return present;
+	}
+
+
+	public int getLevel() {
+		return level;
+	}
+
+
+	public int getScale() {
+		return scale;
+	}
+
+
+	public int getIcon_small() {
+		return icon_small;
+	}
+
+
+	public int getPlugged() {
+		return plugged;
+	}
+
+
+	public int getVoltage() {
+		return voltage;
+	}
+
+
+	public int getTemperature() {
+		return temperature;
+	}
+
+
+	public String getTechnology() {
+		return technology;
+	}
+
+
+	public String getStatusString() {
+		return statusString;
+	}
+
+
+	public String getHealthString() {
+		return healthString;
+	}
+
+
+	public String getAcString() {
+		return acString;
+	}
+
+
+	public String getSb() {
+		return sb.toString();
+	}
 }

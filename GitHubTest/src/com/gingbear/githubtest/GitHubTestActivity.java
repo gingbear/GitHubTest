@@ -17,7 +17,9 @@ public class GitHubTestActivity extends CustomActivity {
             String str = intent.getStringExtra("test");
 			str += WifiChange.check(intent) + "\n";
 			str +=  WifiChange.change(this) + "\n";
-			str += Battery.check(intent) + "\n";
+//			str += Battery.check(intent) + "\n";
+			 Battery battery = Battery.getInstance();
+			 str +=  battery.getSb();
             Toast.makeText(this, str, Toast.LENGTH_LONG).show();
             setEditText(R.id.editText1,"key",str);
         }
