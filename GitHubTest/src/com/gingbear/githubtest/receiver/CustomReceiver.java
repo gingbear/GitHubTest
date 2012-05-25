@@ -1,4 +1,8 @@
-package com.gingbear.githubtest;
+package com.gingbear.githubtest.receiver;
+
+import com.gingbear.githubtest.Battery;
+import com.gingbear.githubtest.CustomLog;
+import com.gingbear.githubtest.WifiChange;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -9,6 +13,10 @@ import android.os.BatteryManager;
 
 public class CustomReceiver extends BroadcastReceiver {
 
+	enum MODE {
+		BATTERY_MODE,
+		MODE_2;
+	}
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		CustomLog.i("DEBUG", "---------- enter ----------");

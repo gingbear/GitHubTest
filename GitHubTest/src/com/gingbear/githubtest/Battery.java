@@ -1,10 +1,15 @@
 package com.gingbear.githubtest;
 
+import com.gingbear.githubtest.receiver.BatteryReceiver;
+
+import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.BatteryManager;
 
-public class Battery {
+public class Battery extends BatteryData{
 	
 	   private static Battery instance;
 	   private Battery(){}; 
@@ -15,25 +20,19 @@ public class Battery {
 	     return instance;
 	   }
 	   
+	   
+	   public void setregisterReceiver(Activity activity){
+
+		   BroadcastReceiver mBroadcastReceiver = new BatteryReceiver(this);
+	        IntentFilter filter = new IntentFilter();
+	        
+	        filter.addAction(Intent.ACTION_BATTERY_CHANGED);
+	        activity.registerReceiver(mBroadcastReceiver, filter);
+	   }
 //	public static String check(Intent intent){
 //		int level = intent.getIntExtra("level", 0);
 //		return level + "%";
 //	}
-    int status = 0;
-
-	int health = 0;
-	boolean present = false;
-    int level = 0;
-    int scale = 0;
-    int icon_small = 0;
-    int plugged = 0;
-    int voltage = 0;
-    int temperature = 0;
-	private  String technology = "";
-	private  String statusString = "";
-	private  String healthString = "";
-	private  String acString = "";
-	private  StringBuilder sb = new StringBuilder();   
 	
 	
 	public String checkBattery(Context context, Intent intent) {
@@ -129,70 +128,4 @@ public class Battery {
         return sb.toString();
     }
     
-	public int getStatus() {
-		return status;
-	}
-    public int getHealth() {
-		return health;
-	}
-
-
-	public boolean isPresent() {
-		return present;
-	}
-
-
-	public int getLevel() {
-		return level;
-	}
-
-
-	public int getScale() {
-		return scale;
-	}
-
-
-	public int getIcon_small() {
-		return icon_small;
-	}
-
-
-	public int getPlugged() {
-		return plugged;
-	}
-
-
-	public int getVoltage() {
-		return voltage;
-	}
-
-
-	public int getTemperature() {
-		return temperature;
-	}
-
-
-	public String getTechnology() {
-		return technology;
-	}
-
-
-	public String getStatusString() {
-		return statusString;
-	}
-
-
-	public String getHealthString() {
-		return healthString;
-	}
-
-
-	public String getAcString() {
-		return acString;
-	}
-
-
-	public String getSb() {
-		return sb.toString();
-	}
 }

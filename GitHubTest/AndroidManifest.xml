@@ -44,7 +44,7 @@
         
         <receiver
             android:exported="true"
-            android:name="com.gingbear.githubtest.CustomReceiver" >
+            android:name=".receiver.CustomReceiver" >
             <intent-filter >
                 <action android:name="com.android.vending.INSTALL_REFERRER" />
                 <!-- Wifi の ON/OFF の検知と変更 -->
