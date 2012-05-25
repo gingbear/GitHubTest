@@ -17,6 +17,7 @@ abstract class BatteryData {
 	protected  String healthString = "";
 	protected  String acString = "";
 	protected  StringBuilder sb = new StringBuilder();   
+	
 	public int getStatus() {
 		return status;
 	}
