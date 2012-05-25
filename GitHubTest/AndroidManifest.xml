@@ -54,11 +54,11 @@
 				<!-- 外部電源 -->
 				<action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
 				<action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+				<action android:name="android.intent.action.BATTERY_CHANGED" />
             </intent-filter>
         </receiver>
         
     <service android:name="com.gingbear.githubtest.ServiceTest">
-		<action android:name="android.intent.action.BATTERY_CHANGED" />
     </service>
         
     </application>

@@ -29,17 +29,17 @@ public class GitHubTestActivity extends CustomActivity {
     protected void onResume() {
         super.onResume();
         
-        IntentFilter filter = new IntentFilter();
-        
-        filter.addAction(Intent.ACTION_BATTERY_CHANGED);
-        registerReceiver(mBroadcastReceiver, filter);
+//        IntentFilter filter = new IntentFilter();
+//        
+//        filter.addAction(Intent.ACTION_BATTERY_CHANGED);
+//        registerReceiver(mBroadcastReceiver, filter);
     }
     @Override
     protected void onPause() {
         super.onPause();
         
-        unregisterReceiver(mBroadcastReceiver);
+//        unregisterReceiver(mBroadcastReceiver);
     }
     
-    private CustomReceiver mBroadcastReceiver = new CustomReceiver();
+//    private CustomReceiver mBroadcastReceiver = new CustomReceiver();
 }

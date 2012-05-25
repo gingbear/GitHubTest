@@ -39,6 +39,7 @@ public class Battery {
 	public String checkBattery(Context context, Intent intent) {
         String action = intent.getAction();
         if (action.equals(Intent.ACTION_BATTERY_CHANGED)) {
+        	sb  = new StringBuilder();   
              status = intent.getIntExtra("status", 0);
              health = intent.getIntExtra("health", 0);
             present = intent.getBooleanExtra("present", false);

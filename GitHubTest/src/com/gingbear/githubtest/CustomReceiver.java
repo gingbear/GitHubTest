@@ -39,11 +39,9 @@ public class CustomReceiver extends BroadcastReceiver {
 		}
 		    
 		 if (action.equals(Intent.ACTION_BATTERY_CHANGED)) {
-			 int level = intent.getIntExtra("level", 0);
-			 if (level > 95) {}
+			 Battery battery = Battery.getInstance();
+			 battery.checkBattery(context, intent);
 		 }
-		 Battery battery = Battery.getInstance();
-		 battery.checkBattery(context, intent);
 //		 checkBattery(context, intent);
 	}
 	
