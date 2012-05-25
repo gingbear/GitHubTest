@@ -30,18 +30,13 @@ public class GitHubTestActivity extends CustomActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        
-        IntentFilter filter = new IntentFilter();
-        
-        filter.addAction(Intent.ACTION_BATTERY_CHANGED);
-        registerReceiver(mBroadcastReceiver, filter);
+        Battery.getInstance().registerReceiver(this);
     }
     @Override
     protected void onPause() {
         super.onPause();
+        Battery.getInstance().unregisterReceiver(this);
         
-        unregisterReceiver(mBroadcastReceiver);
     }
     
-    private CustomReceiver mBroadcastReceiver = new CustomReceiver();
 }

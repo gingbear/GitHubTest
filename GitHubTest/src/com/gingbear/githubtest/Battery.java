@@ -12,45 +12,42 @@ import android.os.BatteryManager;
 public class Battery extends BatteryData{
 	
 	   private static Battery instance;
+	   static BroadcastReceiver mBroadcastReceiver;
 	   private Battery(){}; 
 	   public static synchronized Battery getInstance(){
 	     if(instance == null){ 
 	       instance = new Battery();
+		   mBroadcastReceiver = new BatteryReceiver(instance);
 	     }
 	     return instance;
 	   }
 	   
-	   
-	   public void setregisterReceiver(Activity activity){
+	   public void registerReceiver(Activity activity){
 
-		   BroadcastReceiver mBroadcastReceiver = new BatteryReceiver(this);
 	        IntentFilter filter = new IntentFilter();
 	        
 	        filter.addAction(Intent.ACTION_BATTERY_CHANGED);
 	        activity.registerReceiver(mBroadcastReceiver, filter);
 	   }
-//	public static String check(Intent intent){
-//		int level = intent.getIntExtra("level", 0);
-//		return level + "%";
-//	}
+	   public void unregisterReceiver(Activity activity){
+		   activity.unregisterReceiver(mBroadcastReceiver);
+	   }
 	
 	
-	public String checkBattery(Context context, Intent intent) {
+	public boolean checkBattery(Context context, Intent intent) {
         String action = intent.getAction();
+        
         if (action.equals(Intent.ACTION_BATTERY_CHANGED)) {
-        	sb  = new StringBuilder();   
              status = intent.getIntExtra("status", 0);
              health = intent.getIntExtra("health", 0);
-            present = intent.getBooleanExtra("present", false);
+             present = intent.getBooleanExtra("present", false);
              level = intent.getIntExtra("level", 0);
              scale = intent.getIntExtra("scale", 0);
              icon_small = intent.getIntExtra("icon-small", 0);
              plugged = intent.getIntExtra("plugged", 0);
-            voltage = intent.getIntExtra("voltage", 0);
+             voltage = intent.getIntExtra("voltage", 0);
              temperature = intent.getIntExtra("temperature", 0);
-            /*String*/ technology = intent.getStringExtra("technology");
-            
-//            String statusString = "";
+             technology = intent.getStringExtra("technology");
             
             switch (status) {
             case BatteryManager.BATTERY_STATUS_UNKNOWN:
@@ -69,8 +66,6 @@ public class Battery extends BatteryData{
                 statusString = "full";
                 break;
             }
-            
-//            String healthString = "";
             
             switch (health) {
             case BatteryManager.BATTERY_HEALTH_UNKNOWN:
@@ -93,8 +88,6 @@ public class Battery extends BatteryData{
                 break;
             }
             
-//            String acString = "";
-            
             switch (plugged) {
             case BatteryManager.BATTERY_PLUGGED_AC:
                 acString = "plugged ac";
@@ -103,29 +96,10 @@ public class Battery extends BatteryData{
                 acString = "plugged usb";
                 break;
             }    
-            sb.append("status:"+statusString+"\n");  
-            sb.append("health:"+healthString+"\n");  
-            sb.append("present:"+String.valueOf(present)+"\n");
-            sb.append("level:"+String.valueOf(level)+"\n");    
-            sb.append("scale:"+String.valueOf(scale)+"\n");  
-            sb.append("icon_small:"+String.valueOf(icon_small)+"\n");  
-            sb.append("plugged:"+acString+"\n");
-            sb.append("voltage:"+String.valueOf(voltage)+"\n");
-            sb.append("temperature:"+String.valueOf(temperature)+"\n");
-            sb.append("technology:"+technology+"\n");
-            
-            CustomLog.v("status", statusString);
-            CustomLog.v("health", healthString);
-            CustomLog.v("present", String.valueOf(present));
-            CustomLog.v("level", String.valueOf(level));
-            CustomLog.v("scale", String.valueOf(scale));
-            CustomLog.v("icon_small", String.valueOf(icon_small));
-            CustomLog.v("plugged", acString);
-            CustomLog.v("voltage", String.valueOf(voltage));
-            CustomLog.v("temperature", String.valueOf(temperature));
-            CustomLog.v("technology", technology);
+            return true;
         }
-        return sb.toString();
+        return false;
     }
+	
     
 }
