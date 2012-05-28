@@ -1,9 +1,7 @@
 package com.gingbear.githubtest;
 
-import com.gingbear.githubtest.receiver.CustomReceiver;
 
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,11 +16,13 @@ public class GitHubTestActivity extends CustomActivity implements OnClickListene
         setContentView(R.layout.main);
 
         Intent intent = getIntent();
+		CustomLog.i("DEBUG", "action: " + intent.getAction());
         if(intent != null){
             String str = intent.getStringExtra("test");
 			str += WifiChange.check(intent) + "\n";
 			str +=  WifiChange.change(this) + "\n";
 //			str += Battery.check(intent) + "\n";
+			str += NotifyTest.check(this);
 			 Battery battery = Battery.getInstance();
 			 str +=  battery.getSb();
             Toast.makeText(this, str, Toast.LENGTH_LONG).show();
@@ -31,6 +31,8 @@ public class GitHubTestActivity extends CustomActivity implements OnClickListene
 
         Button button = (Button)findViewById(R.id.button1);
         button.setOnClickListener(this);
+        Button button2 = (Button)findViewById(R.id.button2);
+        button2.setOnClickListener(this);
     }
 
 	public void onClick(View v) {
@@ -38,6 +40,8 @@ public class GitHubTestActivity extends CustomActivity implements OnClickListene
 		if(v.getId() == R.id.button1){
 			
 			NotifyTest.test(getApplicationContext(), this);
+		} else if(v.getId() == R.id.button2){
+			NotifyTest.cancel(GitHubTestActivity.this);
 		}
 	}
     @Override

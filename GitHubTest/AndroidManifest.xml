@@ -59,6 +59,9 @@
         </receiver>
         
     <service android:name="com.gingbear.githubtest.ServiceTest">
+            <intent-filter>
+                <action android:name="BUTTON_CLICK_ACTION" />
+            </intent-filter>
     </service>
         
     </application>
