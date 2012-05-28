@@ -5,9 +5,12 @@ import com.gingbear.githubtest.receiver.CustomReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.Toast;
 
-public class GitHubTestActivity extends CustomActivity {
+public class GitHubTestActivity extends CustomActivity implements OnClickListener {
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -25,8 +28,18 @@ public class GitHubTestActivity extends CustomActivity {
             Toast.makeText(this, str, Toast.LENGTH_LONG).show();
             setEditText(R.id.editText1,"key",str);
         }
+
+        Button button = (Button)findViewById(R.id.button1);
+        button.setOnClickListener(this);
     }
 
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		if(v.getId() == R.id.button1){
+			
+			NotifyTest.test(getApplicationContext(), this);
+		}
+	}
     @Override
     protected void onResume() {
         super.onResume();
