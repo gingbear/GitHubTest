@@ -25,4 +25,8 @@ public class ServiceTest extends Service  {
 		return null;
 	}
 
+    @Override
+    public void onDestroy() {
+        Toast.makeText(this, "Service has been terminated.", Toast.LENGTH_SHORT).show();
+    }
 }
