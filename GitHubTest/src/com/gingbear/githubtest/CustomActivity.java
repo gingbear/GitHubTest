@@ -48,6 +48,7 @@ public class CustomActivity extends Activity  {
 	 void setEditText(int editTextId, String key, String initText){
 		SharedPreferences pref =getSharedPreferences("pref",MODE_WORLD_READABLE|MODE_WORLD_WRITEABLE);
 		EditText editText = (EditText)findViewById(editTextId);
+		editText.setSelected(false);
 		editText.setText(pref.getString(key, initText));
 	}
 	/**
