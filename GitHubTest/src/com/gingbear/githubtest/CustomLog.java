@@ -20,4 +20,7 @@ public class CustomLog {
 	public static void v(String tag , String msg)	{
 		if (debugLog) Log.v(tag, msg);
 	}
+	public static void d(String tag , String msg)	{
+		if (debugLog) Log.d(tag, msg);
+	}
 }
