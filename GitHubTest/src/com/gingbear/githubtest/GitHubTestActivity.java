@@ -33,6 +33,10 @@ public class GitHubTestActivity extends CustomActivity implements OnClickListene
         button.setOnClickListener(this);
         Button button2 = (Button)findViewById(R.id.button2);
         button2.setOnClickListener(this);
+        
+        
+        CustomLocation location = new CustomLocation();
+        location.create(this, location);
     }
 
 	public void onClick(View v) {

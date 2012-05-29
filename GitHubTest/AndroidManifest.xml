@@ -14,10 +14,14 @@
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<!-- インターネット利用 -->
 	<uses-permission android:name="android.permission.INTERNET"/>
-	<!-- GPSの利用権限 -->
+	<!-- GPSの利用権限 （LocationManager.GPS_PROVIDER利用時）-->
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+	<!-- ネットワークによる位置取得の利用権限 （LocationManager.NETWORK_PROVIDER利用時）-->
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 	<!-- エミュレータにてGPSを利用する場合の権限 -->
 	<uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION"/>
+
+	
 	<!-- バッテリー -->
 	 <uses-permission android:name="android.permission.BATTERY_STATS"/>
     <application
