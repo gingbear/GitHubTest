@@ -85,11 +85,10 @@ GpsStatus gpsStat = mLocationManager.getGpsStatus(null);
 Iterable<GpsSatellite> satellites = gpsStat.getSatellites();
 	}
 	
-	final String tag = "ReverseGeocode";
 
 	//座標を住所のStringへ変換
 	public String point2address(double latitude, double longitude, Context context) throws IOException{
-
+		String tag = "ReverseGeocode";
 		String string = new String();
 
 		//geocoedrの実体化
