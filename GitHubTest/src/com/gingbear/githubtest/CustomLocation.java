@@ -1,6 +1,7 @@
 package com.gingbear.githubtest;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
@@ -77,18 +78,50 @@ mLocationManager.requestLocationUpdates(provider, minTime, minDistance, listener
 
 
 Context context = activity.getApplicationContext();
-//(5) 経度、緯度、高度等の情報から住所情報への変換
-//Geocoder geocoder = new Geocoder(context, Locale.JAPAN);
-//List<Address> addressList = geocoder.getFromLocation(latitude, longitude, 5);
-//(6) GPSの状態取得/衛星情報の取得
-GpsStatus gpsStat = mLocationManager.getGpsStatus(null);
-Iterable<GpsSatellite> satellites = gpsStat.getSatellites();
-	}
-	
 
-	//座標を住所のStringへ変換
-	public String point2address(double latitude, double longitude, Context context) throws IOException{
-		String tag = "ReverseGeocode";
+	}
+	/**
+	 * GPSの状態取得/衛星情報の取得 
+	 * @return
+	 */
+	public String satellites(){
+		String tag = "satellites";
+		String string = new String();
+		GpsStatus gpsStat = mLocationManager.getGpsStatus(null);
+		Iterable<GpsSatellite> satellites = gpsStat.getSatellites();
+
+		Iterator<GpsSatellite> iterator = satellites.iterator();
+		
+		//adressをStringへ
+		String buf;
+		StringBuffer strbuf = new StringBuffer();
+		int i=0;
+		while(iterator.hasNext()){
+			buf = iterator.toString();
+				CustomLog.d(tag, "loop no."+i);
+				strbuf.append("address.getAddressLine("+i+"):"+buf+"\n");
+				++i;
+			iterator.next();
+		}
+		if(i<1){
+			CustomLog.d(tag, "Fail Geocoding");
+		} else {
+			string = strbuf.toString();
+		}
+		CustomLog.d(tag, string);
+		return string;
+	}
+
+	/**経度、緯度、高度等の情報から住所情報への変換
+	 * 座標を住所のStringへ変換
+	 * @param latitude
+	 * @param longitude
+	 * @param context
+	 * @return
+	 * @throws IOException
+	 */
+ 	public String point2address(double latitude, double longitude, Context context) throws IOException{
+ 		String tag = "ReverseGeocode";
 		String string = new String();
 
 		//geocoedrの実体化
@@ -98,7 +131,6 @@ Iterable<GpsSatellite> satellites = gpsStat.getSatellites();
 
 		//ジオコーディングに成功したらStringへ
 		if (!list_address.isEmpty()){
-
 			Address address = list_address.get(0);
 			StringBuffer strbuf = new StringBuffer();
 
@@ -108,16 +140,12 @@ Iterable<GpsSatellite> satellites = gpsStat.getSatellites();
 				CustomLog.d(tag, "loop no."+i);
 				strbuf.append("address.getAddressLine("+i+"):"+buf+"\n");
 			}
-
 			string = strbuf.toString();
-
 		}
-
 		//失敗（Listが空だったら）
 		else {
 			CustomLog.d(tag, "Fail Geocoding");
 		}
-
 		CustomLog.d(tag, string);
 		return string;
 	}
