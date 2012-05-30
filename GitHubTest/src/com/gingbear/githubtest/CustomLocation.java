@@ -183,7 +183,19 @@ Context context = activity.getApplicationContext();
        CustomLog.v("Bearing", String.valueOf(location.getBearing()));
 		
 	}
+private class tet extends Location{
 
+	public tet(Location l) {
+		super(l);
+		// TODO 自動生成されたコンストラクター・スタブ
+	}
+	public String getStringLatitude(){
+		String latitude = String.valueOf(this.getLatitude());
+	       CustomLog.v("Latitude（緯度）", latitude);
+	       return latitude;
+		
+	}
+}
 	public void onProviderDisabled(String provider) {
 		// LocationProviderが有効になった場合に呼び出される
 		
