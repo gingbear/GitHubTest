@@ -33,6 +33,8 @@ public class GitHubTestActivity extends CustomActivity implements OnClickListene
         button.setOnClickListener(this);
         Button button2 = (Button)findViewById(R.id.button2);
         button2.setOnClickListener(this);
+        Button button3 = (Button)findViewById(R.id.button3);
+        button3.setOnClickListener(this);
         
         
         CustomLocation location = new CustomLocation();
@@ -46,6 +48,9 @@ public class GitHubTestActivity extends CustomActivity implements OnClickListene
 			NotifyTest.test(getApplicationContext(), this);
 		} else if(v.getId() == R.id.button2){
 			NotifyTest.cancel(GitHubTestActivity.this);
+		} else if(v.getId() == R.id.button3){
+            String str = (new CustomJson()).getJson();
+            Toast.makeText(this, str, Toast.LENGTH_LONG).show();
 		}
 	}
     @Override
