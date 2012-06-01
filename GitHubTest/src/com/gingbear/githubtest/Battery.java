@@ -33,7 +33,6 @@ public class Battery extends BatteryData{
 		   activity.unregisterReceiver(mBroadcastReceiver);
 	   }
 	
-	
 	public boolean checkBattery(Context context, Intent intent) {
         String action = intent.getAction();
         

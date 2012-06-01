@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.os.BatteryManager;
+import android.widget.Toast;
 
 public class CustomReceiver extends BroadcastReceiver {
 
@@ -49,6 +50,8 @@ public class CustomReceiver extends BroadcastReceiver {
 		 if (action.equals(Intent.ACTION_BATTERY_CHANGED)) {
 			 Battery battery = Battery.getInstance();
 			 battery.checkBattery(context, intent);
+			 String str = battery.getSb();
+	         Toast.makeText(context, str, Toast.LENGTH_LONG).show();
 		 }
 //		 checkBattery(context, intent);
 	}
