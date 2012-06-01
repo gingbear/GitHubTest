@@ -15,6 +15,7 @@ public class CustomSensorEvent implements SensorEventListener {
 
 		public void setTetView(TextView textView){
 			this.textView = textView;
+			textView.setText("start");
 		}
 	public void onAccuracyChanged(Sensor sensor, int i) {
 		// TODO 自動生成されたメソッド・スタブ
