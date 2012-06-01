@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class GitHubTestActivity extends CustomActivity implements OnClickListener {
+	CustomSensorEvent event ;
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,11 +38,20 @@ public class GitHubTestActivity extends CustomActivity implements OnClickListene
         Button button3 = (Button)findViewById(R.id.button3);
         button3.setOnClickListener(this);
         
-        
+        event = new CustomSensorEvent(this);
+        TextView textView = (TextView)findViewById(R.id.textView1);
+        event.setTetView(textView);
         CustomLocation location = new CustomLocation();
         location.create(this, location);
     }
 
+	@Override
+	protected void onStop() {
+	// TODO Auto-generated method stub
+	super.onStop();
+	// Listenerの登録解除
+event.onStop();
+	}
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		if(v.getId() == R.id.button1){
@@ -56,6 +67,7 @@ public class GitHubTestActivity extends CustomActivity implements OnClickListene
     @Override
     protected void onResume() {
         super.onResume();
+        event.onResume();
         Battery.getInstance().registerReceiver(this);
     }
     @Override
