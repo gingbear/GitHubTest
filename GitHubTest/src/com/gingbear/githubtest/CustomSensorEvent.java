@@ -44,7 +44,9 @@ public class CustomSensorEvent implements SensorEventListener {
 					+ "\nY軸:" + event.values[1] 
 							+ "\nZ軸:" + event.values[2];
 			textView.setText(str);
-		}// else if (event.sensor.getType() == Sensor.TY)
+		} else if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD){
+			
+		}
 	}
 
 }
