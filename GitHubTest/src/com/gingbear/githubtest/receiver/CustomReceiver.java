@@ -20,8 +20,11 @@ public class CustomReceiver extends BroadcastReceiver {
 	}
 	@Override
 	public void onReceive(Context context, Intent intent) {
+        Toast.makeText(context, "action: ...", Toast.LENGTH_LONG).show();
 		CustomLog.i("DEBUG", "---------- enter ----------");
 		CustomLog.i("DEBUG", "action: " + intent.getAction());
+
+        Toast.makeText(context, "action: " + intent.getAction(), Toast.LENGTH_LONG).show();
 		CharSequence cs = intent.getExtras().getCharSequence(Intent.EXTRA_TEXT);
 		String action = intent.getAction();
 		// Wifi の ON/OFF が切り替えられたら WifiChangeActivity を起動
