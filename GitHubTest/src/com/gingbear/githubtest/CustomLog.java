@@ -23,4 +23,7 @@ public class CustomLog {
 	public static void d(String tag , String msg)	{
 		if (debugLog) Log.d(tag, msg);
 	}
+	public static void w(String tag , String msg)	{
+		if(logOutput) Log.w(tag, msg);
+	}
 }

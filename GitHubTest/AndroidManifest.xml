@@ -7,68 +7,104 @@
     <uses-sdk android:minSdkVersion="9" />
 
     <!-- Wifi の ON/OFF の検知と変更 -->
-	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-	<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-	
-    <!-- ネットワーク接続状態の検知 -->
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-	<!-- インターネット利用 -->
-	<uses-permission android:name="android.permission.INTERNET"/>
-	<!-- GPSの利用権限 （LocationManager.GPS_PROVIDER利用時）-->
-	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-	<!-- ネットワークによる位置取得の利用権限 （LocationManager.NETWORK_PROVIDER利用時）-->
-	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-	<!-- エミュレータにてGPSを利用する場合の権限 -->
-	<uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
-	
-	<!-- バッテリー -->
-	 <uses-permission android:name="android.permission.BATTERY_STATS"/>
-	<!-- BLUETOOTH -->
-	 <uses-permission android:name="android.permission.BLUETOOTH" />
+    <!-- ネットワーク接続状態の検知 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- インターネット利用 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- GPSの利用権限 （LocationManager.GPS_PROVIDER利用時） -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- ネットワークによる位置取得の利用権限 （LocationManager.NETWORK_PROVIDER利用時） -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- エミュレータにてGPSを利用する場合の権限 -->
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+
+    <!-- バッテリー -->
+    <uses-permission android:name="android.permission.BATTERY_STATS" />
+    <!-- BLUETOOTH -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+
+<!-- このアプリケーションだけがメッセージの受信と登録の結果の受信が可能 --> 
+    <permission
+        android:name="com.gingbear.githubtest.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="com.gingbear.githubtest.permission.C2D_MESSAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+<!-- このアプリケーションは登録とメッセージ受信の許可がある -->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+<!-- このアプリケーションは登録とメッセージ受信の許可がある -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
         <activity
+            android:name=".GitHubTestActivity"
             android:label="@string/app_name"
-            android:name=".GitHubTestActivity" 
-            android:screenOrientation="portrait">
-            <intent-filter >
+            android:screenOrientation="portrait" >
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <data android:scheme="gingbear" android:host="com.gingbear.githubtest" />
+
+                <data
+                    android:host="com.gingbear.githubtest"
+                    android:scheme="gingbear" />
             </intent-filter>
         </activity>
-        
-        
+
         <receiver
-            android:exported="true"
-            android:name=".receiver.CustomReceiver" >
-            <intent-filter >
+            android:name=".receiver.CustomReceiver"
+            android:exported="true" >
+            <intent-filter>
                 <action android:name="com.android.vending.INSTALL_REFERRER" />
                 <!-- Wifi の ON/OFF の検知と変更 -->
                 <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
                 <!-- ネットワーク接続状態の検知 -->
                 <action android:name="android.net.wifi.STATE_CHANGE" />
-				<!-- 外部電源 -->
-				<action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
-				<action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
-				<action android:name="android.intent.action.BATTERY_CHANGED" />
+                <!-- 外部電源 -->
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+                <action android:name="android.intent.action.BATTERY_CHANGED" />
             </intent-filter>
         </receiver>
-        
-    <service android:name="com.gingbear.githubtest.ServiceTest">
+
+        <service android:name="com.gingbear.githubtest.ServiceTest" >
             <intent-filter>
                 <action android:name="BUTTON_CLICK_ACTION" />
             </intent-filter>
-    </service>
-        
+        </service>
+        <service android:name=".C2DMReceiver" />
+
+<!-- C2DM サーバのみがアプリにメッセージを送信できる。許可がセットされないと、他のどのアプリでもこれを生成できてしまう --> 
+        <receiver
+            android:name="com.google.android.c2dm.C2DMBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+    <!-- 実際のメッセージの受信 -->
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
+                <category android:name="com.gingbear.githubtest" />
+            </intent-filter>
+    <!-- 登録 ID の受信 -->
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+                <category android:name="com.gingbear.githubtest" />
+            </intent-filter>
+        </receiver>
     </application>
+
 </manifest>
