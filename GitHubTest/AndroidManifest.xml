@@ -86,7 +86,7 @@
                 <action android:name="BUTTON_CLICK_ACTION" />
             </intent-filter>
         </service>
-        <service android:name=".C2DMReceiver" />
+        <service android:name="com.gingbear.githubtest.receiver.C2DMReceiver" />
 
 <!-- C2DM サーバのみがアプリにメッセージを送信できる。許可がセットされないと、他のどのアプリでもこれを生成できてしまう --> 
         <receiver
