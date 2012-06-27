@@ -16,9 +16,6 @@ import android.widget.Toast;
 
 public class CustomActivity extends Activity  {
     public Handler mH;
-	public static void test(){
-		
-	}
 //	public void onCreate(Bundle savedInstanceState) {
 //        super.onCreate(savedInstanceState);
 //        

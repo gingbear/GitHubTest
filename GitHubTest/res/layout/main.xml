@@ -80,4 +80,16 @@
         android:layout_weight="0.29"
         android:text="TextView" />
 
+    <TextView
+        android:id="@+id/width_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/height_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
 </LinearLayout>
