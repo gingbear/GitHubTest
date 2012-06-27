@@ -48,7 +48,7 @@ public class CustomActivity extends Activity  {
                 if (msg.getData().getBoolean("receivedMessageFlag")) {
                     String message = msg.getData().getString("receivedMessageString");
                    
-                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                    CustomToast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                    
                     test.setText(message);
                 }

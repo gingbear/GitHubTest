@@ -62,7 +62,7 @@ public class GitHubTestActivity extends CustomActivity implements OnClickListene
                 if (msg.getData().getBoolean("receivedMessageFlag")) {
                     String message = msg.getData().getString("receivedMessageString");
                    
-                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                    CustomToast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                    
                     TextView textView = (TextView) findViewById(R.id.message);
                     textView.setText(message);
@@ -98,7 +98,7 @@ public class GitHubTestActivity extends CustomActivity implements OnClickListene
 			NotifyTest.cancel(GitHubTestActivity.this);
 		} else if(v.getId() == R.id.button3){
             String str = (new CustomJson()).getJson();
-            Toast.makeText(this, str, Toast.LENGTH_LONG).show();
+            CustomToast.makeText(this, str, Toast.LENGTH_LONG).show();
 		} else if(v.getId() == R.id.button4){
 			// C2DMサーバーへ登録リクエスト
 			C2DMessaging.register(GitHubTestActivity.this, getString(R.string.googleId));

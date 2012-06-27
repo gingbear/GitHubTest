@@ -2,6 +2,7 @@ package com.gingbear.githubtest.receiver;
 
 import com.gingbear.githubtest.Battery;
 import com.gingbear.githubtest.CustomLog;
+import com.gingbear.githubtest.CustomToast;
 import com.gingbear.githubtest.WifiChange;
 
 import android.content.BroadcastReceiver;
@@ -20,11 +21,11 @@ public class CustomReceiver extends BroadcastReceiver {
 	}
 	@Override
 	public void onReceive(Context context, Intent intent) {
-        Toast.makeText(context, "action: ...", Toast.LENGTH_LONG).show();
+		CustomToast.makeText(context, "action: ...", Toast.LENGTH_LONG).show();
 		CustomLog.i("DEBUG", "---------- enter ----------");
 		CustomLog.i("DEBUG", "action: " + intent.getAction());
 
-        Toast.makeText(context, "action: " + intent.getAction(), Toast.LENGTH_LONG).show();
+		CustomToast.makeText(context, "action: " + intent.getAction(), Toast.LENGTH_LONG).show();
 		CharSequence cs = intent.getExtras().getCharSequence(Intent.EXTRA_TEXT);
 		String action = intent.getAction();
 		// Wifi の ON/OFF が切り替えられたら WifiChangeActivity を起動
@@ -54,7 +55,7 @@ public class CustomReceiver extends BroadcastReceiver {
 			 Battery battery = Battery.getInstance();
 			 battery.checkBattery(context, intent);
 			 String str = battery.getSb();
-	         Toast.makeText(context, str, Toast.LENGTH_LONG).show();
+			 CustomToast.makeText(context, str, Toast.LENGTH_LONG).show();
 		 }
 //		 checkBattery(context, intent);
 	}
