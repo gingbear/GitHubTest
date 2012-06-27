@@ -2,3 +2,5 @@ GitHubTest/gen
 GitHubTest/bin
 GitHubTest/.classpath
 GitHubTest/.project
+GitHubTest/res/values/secret.xml
+
