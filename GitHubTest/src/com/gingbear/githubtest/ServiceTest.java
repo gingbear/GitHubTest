@@ -15,7 +15,7 @@ public class ServiceTest extends Service  {
  
         // ボタンが押された時に発行されたインテントの場合は文字を変更する
         if (BUTTON_CLICK_ACTION.equals(intent.getAction())) {
-            Toast.makeText(this, "Service Test", Toast.LENGTH_LONG).show();
+        	CustomToast.makeText(this, "Service Test", Toast.LENGTH_LONG).show();
         }
  
     }
@@ -27,6 +27,6 @@ public class ServiceTest extends Service  {
 
     @Override
     public void onDestroy() {
-        Toast.makeText(this, "Service has been terminated.", Toast.LENGTH_SHORT).show();
+    	CustomToast.makeText(this, "Service has been terminated.", Toast.LENGTH_SHORT).show();
     }
 }

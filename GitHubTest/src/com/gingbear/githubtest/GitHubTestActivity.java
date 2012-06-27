@@ -3,34 +3,25 @@ package com.gingbear.githubtest;
 
 import com.google.android.c2dm.C2DMessaging;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class GitHubTestActivity extends CustomActivity implements OnClickListener {
 	CustomSensorEvent event ;
-	
-//	public void test1(){
-//		
-//	}
-//	
-//	public void test2(){
-//		
-//	}
+
     public static Handler mH;
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+
 //        Intent intent = getIntent();
 //		CustomLog.i("DEBUG", "action: " + intent.getAction());
 //        if(intent != null){
@@ -71,7 +62,7 @@ public class GitHubTestActivity extends CustomActivity implements OnClickListene
                 if (msg.getData().getBoolean("receivedMessageFlag")) {
                     String message = msg.getData().getString("receivedMessageString");
                    
-                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                    CustomToast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                    
                     TextView textView = (TextView) findViewById(R.id.message);
                     textView.setText(message);
@@ -81,8 +72,14 @@ public class GitHubTestActivity extends CustomActivity implements OnClickListene
         };
         CustomLog.w("message1:", "test5");
         
-    
-    
+        
+        event = new CustomSensorEvent(this);
+        TextView textView = (TextView)findViewById(R.id.textView1);
+        event.setTetView(textView);
+        CustomLocation location = new CustomLocation();
+        location.create(this, location);
+        
+        this.setC2DM((TextView)findViewById(R.id.c2dm));
     }
 
 	@Override
@@ -101,7 +98,7 @@ public class GitHubTestActivity extends CustomActivity implements OnClickListene
 			NotifyTest.cancel(GitHubTestActivity.this);
 		} else if(v.getId() == R.id.button3){
             String str = (new CustomJson()).getJson();
-            Toast.makeText(this, str, Toast.LENGTH_LONG).show();
+            CustomToast.makeText(this, str, Toast.LENGTH_LONG).show();
 		} else if(v.getId() == R.id.button4){
 			// C2DMサーバーへ登録リクエスト
 			C2DMessaging.register(GitHubTestActivity.this, getString(R.string.googleId));

@@ -31,6 +31,7 @@
         android:name="com.gingbear.githubtest.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
 
+<!-- アカウント情報を取得 --> 
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="com.gingbear.githubtest.permission.C2D_MESSAGE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />

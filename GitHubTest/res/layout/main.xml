@@ -81,13 +81,7 @@
         android:text="TextView" />
 
     <TextView
-        android:id="@+id/width_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/height_id"
+        android:id="@+id/c2dm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView" />

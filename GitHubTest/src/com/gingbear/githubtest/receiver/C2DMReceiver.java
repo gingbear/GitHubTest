@@ -1,6 +1,5 @@
 package com.gingbear.githubtest.receiver;
 
-import com.gingbear.githubtest.R;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,14 +7,17 @@ import android.os.Message;
 
 import com.gingbear.githubtest.CustomActivity;
 import com.gingbear.githubtest.CustomLog;
-import com.gingbear.githubtest.GitHubTestActivity;
+
+import com.gingbear.githubtest.R;
 import com.google.android.c2dm.C2DMBaseReceiver;
 
 public class C2DMReceiver extends C2DMBaseReceiver{
-//	private CustomActivity TopActivity = null;
+	public static CustomActivity TopActivity = null;
+	public static String GoogleAccountId = "";
 	public C2DMReceiver() {
-//		super(context.getString(R.string.googleId));
-		super("test@gmail.com");
+		super(GoogleAccountId);
+		
+
 		// TODO Auto-generated constructor stub
 		CustomLog.w("message:", "test-----");
 	}
@@ -52,12 +54,12 @@ public class C2DMReceiver extends C2DMBaseReceiver{
 	}
     // サーバーからメッセージを受け取ったときの処理
     private void sendMessage(String str) {
-    	CustomLog.w("message:", "test5");
-        Message mes = Message.obtain(GitHubTestActivity.mH);
+    	if(TopActivity == null)return;
+        Message mes = Message.obtain(TopActivity.mH);
         Bundle data = mes.getData();
         data.putBoolean("receivedMessageFlag", true);
         data.putString("receivedMessageString", str);
-        GitHubTestActivity.mH.sendMessage(mes);
+        TopActivity.mH.sendMessage(mes);
         mes = null;
     }
 
