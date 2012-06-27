@@ -1,6 +1,5 @@
 package com.gingbear.githubtest.receiver;
 
-import com.gingbear.githubtest.R;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,12 +7,15 @@ import android.os.Message;
 
 import com.gingbear.githubtest.CustomActivity;
 import com.gingbear.githubtest.CustomLog;
+import com.gingbear.githubtest.R;
 import com.google.android.c2dm.C2DMBaseReceiver;
 
 public class C2DMReceiver extends C2DMBaseReceiver{
-	private CustomActivity TopActivity = null;
+	public static CustomActivity TopActivity = null;
+	public static String GoogleAccountId = "";
 	public C2DMReceiver() {
-		super("");
+		super(GoogleAccountId);
+		
 		// TODO Auto-generated constructor stub
 	}
 
@@ -36,6 +38,7 @@ public class C2DMReceiver extends C2DMBaseReceiver{
         sendMessage("err:" + errorId);
 	}
     private void sendMessage(String str) {
+    	if(TopActivity == null)return;
         Message mes = Message.obtain(TopActivity.mH);
         Bundle data = mes.getData();
         data.putBoolean("receivedMessageFlag", true);

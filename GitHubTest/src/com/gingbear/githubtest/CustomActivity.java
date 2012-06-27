@@ -1,8 +1,14 @@
 package com.gingbear.githubtest;
 
+import java.util.ArrayList;
+
+import com.gingbear.githubtest.receiver.C2DMReceiver;
 import com.google.android.c2dm.C2DMessaging;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.ApplicationInfo;
@@ -23,9 +29,17 @@ public class CustomActivity extends Activity  {
 //        super.onCreate(savedInstanceState);
 //        
 //	}
+	/**
+	 * C2DMを使う場合に使う。
+	 * C2DMReceiverに表示画面の情報を渡して，受信したら表示が更新されるようにする。
+	 * @param textView
+	 */
 	public void setC2DM(TextView textView){
-
-        C2DMessaging.register(this, "この端末利用者のGoogleアカウントID");
+        C2DMReceiver.TopActivity = this;
+		C2DMReceiver.GoogleAccountId = getString(R.string.googleId);
+		
+        C2DMessaging.register(this, this.getAccount(this, 1).name);
+ //       C2DMessaging.register(this, "この端末利用者のGoogleアカウントID");
  
         textView.setText(C2DMessaging.getRegistrationId(this));
        final TextView  test = textView;
@@ -90,4 +104,34 @@ public class CustomActivity extends Activity  {
 		if(value == null) return "";
 		return value.toString();
 	}
+	
+	public String[] getAccounts(Context context) {  
+	    ArrayList<String> accountsInfo = new ArrayList<String>();  
+	    Account[] accounts = AccountManager.get(context).getAccounts();  
+	    for (Account account : accounts) {  
+	        String name = account.name;  
+	        String type = account.type;  
+	        int describeContents = account.describeContents();  
+	        int hashCode = account.hashCode();  
+	     
+	        accountsInfo.add("name = " + name +   
+	                         "\ntype = " + type +   
+	                         "\ndescribeContents = " + describeContents +   
+	                         "\nhashCode = " + hashCode);  
+	    }  
+	  
+	    String[] result = new String[accountsInfo.size()];  
+	    accountsInfo.toArray(result);  
+	    return result;  
+	} 
+	private Account getAccount(Context context, int number ){
+	    ArrayList<String> accountsInfo = new ArrayList<String>();  
+	    Account[] accounts = AccountManager.get(context).getAccounts();  
+	    if(accounts.length>0)return accounts[number];
+	    else return null;
+	}
+	
+	
+	
+	
 }
