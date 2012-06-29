@@ -21,7 +21,11 @@ public class C2DMReceiver extends C2DMBaseReceiver{
 		// TODO Auto-generated constructor stub
 		CustomLog.w("message:", "test-----");
 	}
-
+	public static void setParam(CustomActivity TopActivity, String GoogleAccountId){
+		if(C2DMReceiver.TopActivity != null)return;
+		C2DMReceiver.TopActivity = TopActivity;
+		C2DMReceiver.GoogleAccountId = GoogleAccountId;
+	}
     // 登録時の処理
     @Override
     public void onRegistered(

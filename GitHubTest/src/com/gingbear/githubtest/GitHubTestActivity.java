@@ -37,41 +37,22 @@ public class GitHubTestActivity extends CustomActivity implements OnClickListene
 //        }
         CustomLog.w("message1:", "test1");
         Button button = (Button)findViewById(R.id.button1);
+        button.setText("ティッカーテキストon");
         button.setOnClickListener(this);
         Button button2 = (Button)findViewById(R.id.button2);
+        button2.setText("ティッカーテキストcancel");
         button2.setOnClickListener(this);
         Button button3 = (Button)findViewById(R.id.button3);
+        button3.setText("JSON");
         button3.setOnClickListener(this);
-        CustomLog.w("message1:", "test2");
-//        event = new CustomSensorEvent(this);
-//        TextView textView = (TextView)findViewById(R.id.textView1);
-//        event.setTetView(textView);
-//        CustomLocation location = new CustomLocation();
-//        location.create(this, location);
-        CustomLog.w("message1:", "test3");
-        
-        C2DMessaging.register(this, "test@gmail.com"/*この端末利用者のGoogleアカウントID*/);
-        
-        CustomLog.w("message1:", "test");
-        TextView textView2 = (TextView) findViewById(R.id.textView2);
-        textView2.setText(C2DMessaging.getRegistrationId(this));
-        CustomLog.w("message1:", "test4");
-        mH = new Handler() {
-            public void handleMessage(android.os.Message msg) {
-            	CustomLog.w("message1:", "test6");
-                if (msg.getData().getBoolean("receivedMessageFlag")) {
-                    String message = msg.getData().getString("receivedMessageString");
-                   
-                    CustomToast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                   
-                    TextView textView = (TextView) findViewById(R.id.message);
-                    textView.setText(message);
-                }
-                CustomLog.w("message1:", "test7");
-            }
-        };
-        CustomLog.w("message1:", "test5");
-        
+        Button button4 = (Button)findViewById(R.id.button4);
+        button4.setText("C2DMサーバーへ登録");
+        button4.setOnClickListener(this);
+        Button button5 = (Button)findViewById(R.id.button5);
+        button5.setText("C2DMサーバーへ解除");
+        button5.setOnClickListener(this);
+
+  
         
         event = new CustomSensorEvent(this);
         TextView textView = (TextView)findViewById(R.id.textView1);
@@ -101,10 +82,12 @@ public class GitHubTestActivity extends CustomActivity implements OnClickListene
             CustomToast.makeText(this, str, Toast.LENGTH_LONG).show();
 		} else if(v.getId() == R.id.button4){
 			// C2DMサーバーへ登録リクエスト
-			C2DMessaging.register(GitHubTestActivity.this, getString(R.string.googleId));
+			startC2DM();
+			CustomToast.makeText(this, "C2DMサーバーへ登録リクエスト", Toast.LENGTH_LONG).show();
 		} else if(v.getId() == R.id.button5){
 			// C2DMサーバーへ解除リクエスト
-			C2DMessaging.unregister(GitHubTestActivity.this);
+			stopC2DM();
+			CustomToast.makeText(this, "C2DMサーバーへ解除リクエスト", Toast.LENGTH_LONG).show();
 			
 		}
 	}
