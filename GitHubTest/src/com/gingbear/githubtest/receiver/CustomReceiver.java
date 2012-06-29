@@ -22,8 +22,6 @@ public class CustomReceiver extends BroadcastReceiver {
 	}
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		CustomToast.makeText(context, "action: ...", Toast.LENGTH_LONG).show();
-		CustomLog.i("DEBUG", "---------- enter ----------");
 		CustomLog.i("DEBUG", "action: " + intent.getAction());
 
 		CustomToast.makeText(context, "action: " + intent.getAction(), Toast.LENGTH_LONG).show();
