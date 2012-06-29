@@ -1,6 +1,7 @@
 package com.gingbear.githubtest.receiver;
 
 import com.gingbear.githubtest.Battery;
+import com.gingbear.githubtest.CustomActivity;
 import com.gingbear.githubtest.CustomLog;
 import com.gingbear.githubtest.CustomToast;
 import com.gingbear.githubtest.WifiChange;
@@ -52,9 +53,10 @@ public class CustomReceiver extends BroadcastReceiver {
 		}
 		    
 		 if (action.equals(Intent.ACTION_BATTERY_CHANGED)) {
-			 Battery battery = Battery.getInstance();
-			 battery.checkBattery(context, intent);
-			 String str = battery.getSb();
+//			 Battery battery = Battery.getInstance();
+//			 battery.checkBattery(context, intent);
+//			 String str = battery.getSb();
+			 String str = "なし";
 			 CustomToast.makeText(context, str, Toast.LENGTH_LONG).show();
 		 }
 //		 checkBattery(context, intent);

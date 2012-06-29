@@ -35,7 +35,7 @@ public class CustomActivity extends Activity  {
 		
 		this.startC2DM();
 		
-        textView.setText(C2DMessaging.getRegistrationId(this));
+        textView.setText(C2DMessaging.getRegistrationId(CustomActivity.this));
        final TextView  test = textView;
         mH = new Handler() {
             public void handleMessage(android.os.Message msg) {
@@ -50,12 +50,12 @@ public class CustomActivity extends Activity  {
         };
 	}
 	public void startC2DM(){
-		C2DMReceiver.setParam(this, getString(R.string.googleId));
-        C2DMessaging.register(this, this.getAccount(this, 1).name);
+		C2DMReceiver.setParam(CustomActivity.this, getString(R.string.googleId));
+        C2DMessaging.register(CustomActivity.this, this.getAccount(CustomActivity.this, 1).name);
         //       C2DMessaging.register(this, "この端末利用者のGoogleアカウントID");
 	}
 	public void stopC2DM(){
-		C2DMessaging.unregister(this);
+		C2DMessaging.unregister(CustomActivity.this);
 	}
 	/**
 	 * xmlで設定されたButtonにTextとClickをセット

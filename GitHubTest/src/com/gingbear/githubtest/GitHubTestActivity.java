@@ -60,7 +60,7 @@ public class GitHubTestActivity extends CustomActivity implements OnClickListene
         CustomLocation location = new CustomLocation();
         location.create(this, location);
         
-        this.setC2DM((TextView)findViewById(R.id.c2dm));
+//        this.setC2DM((TextView)findViewById(R.id.c2dm));
     }
 
 	@Override
