@@ -26,4 +26,8 @@ public class CustomLog {
 	public static void w(String tag , String msg)	{
 		if(logOutput) Log.w(tag, msg);
 	}
+	public static void e(String tag, String msg)
+	{
+		if(logOutput) Log.e(tag , msg);
+	}
 }

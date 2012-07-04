@@ -12,16 +12,26 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.telephony.TelephonyManager;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.util.UUID;
 
 public class CustomActivity extends Activity  {
     public Handler mH;
+	//--------------------------------------------------------------------------------
+	// その他
+	//--------------------------------------------------------------------------------
+	public static final String LOG_TAG = "CustomActivity";
 //	public void onCreate(Bundle savedInstanceState) {
 //        super.onCreate(savedInstanceState);
 //        
@@ -133,7 +143,67 @@ public class CustomActivity extends Activity  {
 	    else return null;
 	}
 	
-	
-	
+	/**
+	 * MACアドレスの取得
+	 * 形式aa:bb:cc:dd:ee:ff
+	 * @return String
+	 */
+	protected String getMacAddress(){
+		WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE); 
+		WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+		String macAddress = wifiInfo.getMacAddress();
+		// 端末IDが取得できなければ発行する。
+		if(macAddress == null || macAddress.length() <= 0)
+			macAddress = "aa:bb:cc:dd:ee:ff";
+		return macAddress;
+	}
+
+	protected String getDeviceId(){
+		TelephonyManager mTelephonyMgr = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
+		// IMEI
+		String imei = mTelephonyMgr.getDeviceId();
+		// 端末IDが取得できなければ発行する。
+		if(imei == null || imei.length() <= 0)
+			imei = UUID.randomUUID().toString();
+		return imei;
+	}
+
+	/**
+	 * AndroidManifest.xmlから
+	 * アプリケーションの設定情報を取得
+	 */
+	private synchronized void loadApplicationInfo(){
+		ApplicationInfo info;
+
+		//PackageManagerを取得
+		PackageManager manager = getPackageManager();
+		if(manager == null){
+			CustomLog.e(LOG_TAG, "PackageManager is null.");
+			return;
+		}
+		
+		//android:debuggable 属性を取得し、それに応じてデバッグログ出力を制御
+		//指定されていない場合、通常はtrueとなり、
+		//Android Toolsの signed release build時はfalseとなる。
+		try {
+			//contextのパッケージ内のアプリケーション設定情報を全て取得
+			info = manager.getApplicationInfo(getPackageName(), 0);
+		} catch (NameNotFoundException e) {
+			CustomLog.e(LOG_TAG, "loadApplicationInfo faild. " + e.getMessage());
+			return;
+		}
+		if(info == null){
+			CustomLog.e(LOG_TAG, "ApplicationInfo is null.");
+			return;
+		}
+		if ((info.flags & ApplicationInfo.FLAG_DEBUGGABLE) == ApplicationInfo.FLAG_DEBUGGABLE) {
+			CustomLog.setDebugLogging(true);
+			CustomLog.setLogOutput(true);
+		}
+		
+		
+		
+		
+	}
 	
 }

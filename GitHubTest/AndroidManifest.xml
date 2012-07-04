@@ -9,7 +9,8 @@
     <!-- Wifi の ON/OFF の検知と変更 -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-
+   <!-- Android端末各種情報取得 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/> 
     <!-- ネットワーク接続状態の検知 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!-- インターネット利用 -->
