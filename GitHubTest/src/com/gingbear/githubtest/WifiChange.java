@@ -12,6 +12,7 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public class WifiChange {
 	static public String check(Intent intent){
@@ -244,10 +245,25 @@ public class WifiChange {
 				nets[i] = ((OutWifiConfiguration) cfgList.get(i)).toString();
 			}
 			return nets.toString();
-//			ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, nets);
-//			setListAdapter(adapter);
 		}
 		return "";
+	}
+	static public ListView getListView(Context context){
+			ListView lv = new ListView(context);
+		WifiManager manager  = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+		// WiFi設定の一覧を取得
+		List<WifiConfiguration> cfgList = manager.getConfiguredNetworks();
+		if(cfgList != null) {
+			String[] nets = new String[cfgList.size()];
+			for(int i=0; i<cfgList.size(); i++) {
+				nets[i] = ((OutWifiConfiguration) cfgList.get(i)).toString();
+			}
+
+			ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, nets);
+			lv.setAdapter(adapter);
+		}
+		return lv;
+		
 	}
 	public void fufu(Context context){
 		WifiManager manager  = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
