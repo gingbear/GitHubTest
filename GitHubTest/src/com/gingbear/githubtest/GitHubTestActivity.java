@@ -65,6 +65,12 @@ public class GitHubTestActivity extends CustomActivity implements OnClickListene
         textViewmacaddress.setText(getMacAddress());
         TextView textViewdeviceid = (TextView)findViewById(R.id.deviceid);
         textViewdeviceid.setText(getDeviceId());
+        
+
+        TextView textView1 = (TextView)findViewById(R.id.textView1);
+        textView1.setText(WifiChange.getWifiState(this));
+        
+        
 //        this.setC2DM((TextView)findViewById(R.id.c2dm));
     }
 

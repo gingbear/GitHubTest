@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -122,6 +123,117 @@ public class WifiChange {
 //	status	ネットワークの状態
 //	wepKeys	WEPキー
 //	wepTxKeyIndex	WEPキーのインデックス
+	
+	class OutWifiConfiguration extends WifiConfiguration{
+		private OutWifiConfiguration(){
+			
+		}
+		public String toString(){
+			return toStringNetWorkId() + "\n"
+					+ toStringBSSID() + "\n"
+							+ toStringBSSID() + "\n"
+									+ toStringSSID() + "\n"
+											+ toStringHiddenSSID() + "\n"
+													+ toStringNetworkId() + "\n"
+															+ toStringPreSharedKey() + "\n"
+																	+ toStringPriority() + "\n"
+																			+ toStringStatus() + "\n"
+																					+ toStringWepKeys() + "\n"
+																					+ toStringWepTxKeyIndex() + "\n";
+		}
+		private String toStringNetWorkId(){
+			return String.format("Network ID:%4d", this.networkId);
+		}
+		
+		/**
+		 * AP( アクセス・ポイント)のMACアドレス
+		 * @return
+		 */
+		private String toStringBSSID(){
+			return String.format("BSSID:%s", this.BSSID);
+		}
+		
+		/**
+		 * ネットワーク名
+		 * @return
+		 */
+		private String toStringSSID(){
+			return String.format("SSID:%s", this.SSID);
+		}
+		
+		/**
+		 * ステルスモード
+		 * @return
+		 */
+		private String toStringHiddenSSID(){
+			return String.format("hiddenSSID:%4d", this.hiddenSSID);
+		}
+		
+		/**
+		 * ネットワーク番号
+		 * @return
+		 */
+		private String toStringNetworkId(){
+			return String.format("Network ID:%4d", this.networkId);
+		}
+		
+		/**
+		 * WPA-PSKの鍵
+		 * @return
+		 */
+		private String toStringPreSharedKey(){
+			return String.format("preSharedKey:%4d", this.preSharedKey);
+		}
+		
+		/**
+		 * 複数のAPが使用できるときの優先度
+		 * @return
+		 */
+		private String toStringPriority(){
+			return String.format("priority:%4d", this.priority);
+		}
+		
+		/**
+		 * ネットワークの状態
+		 * @return
+		 */
+		private String toStringStatus(){
+			String string = "";
+			switch(this.status){
+			case Status.CURRENT:
+				string = "使用中";
+				break;
+			case Status.DISABLED:
+				string = "使用不可";
+				break;
+			case Status.ENABLED:
+				string = "使用可能";
+				break;
+			}
+			return "status:" + string;
+		}
+		
+		/**
+		 * WEPキー
+		 * @return
+		 */
+		private String toStringWepKeys(){
+			String string ="";
+			for(int i=0;i<this.wepKeys.length;++i){
+				string += "wepKey " + i + " :" +this.wepKeys[i] + "\n";
+			}
+			
+			return string;
+		}
+		
+		/**
+		 * WEPキーのインデックス
+		 * @return
+		 */
+		private String toStringWepTxKeyIndex(){
+			return String.format("wepTxKeyIndex:%4d", this.wepTxKeyIndex);
+		}
+	}
 	static public String getConfiguredNetworks(Context context){
 		WifiManager manager  = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
 		// WiFi設定の一覧を取得
@@ -129,12 +241,28 @@ public class WifiChange {
 		if(cfgList != null) {
 			String[] nets = new String[cfgList.size()];
 			for(int i=0; i<cfgList.size(); i++) {
-				nets[i] = String.format("Network ID:%4d\nSSID:%s", 
-													cfgList.get(i).networkId, cfgList.get(i).SSID);
+				nets[i] = ((OutWifiConfiguration) cfgList.get(i)).toString();
 			}
+			return nets.toString();
 //			ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, nets);
 //			setListAdapter(adapter);
 		}
 		return "";
+	}
+	public void fufu(Context context){
+		WifiManager manager  = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+		if(manager.getWifiState() == WifiManager.WIFI_STATE_ENABLED) {
+			// APをスキャン
+			manager.startScan();
+			// スキャン結果を取得
+			List<ScanResult> apList = manager.getScanResults();
+			String[] aps = new String[apList.size()];
+			for(int i=0; i<apList.size(); i++) {
+				aps[i] = "SSID:" + apList.get(i).SSID + "\n" 
+							+ apList.get(i).frequency + "MHz " + apList.get(i).level + "dBm";
+			}
+//			ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, aps);
+//			setListAdapter(adapter);
+		}
 	}
 }
