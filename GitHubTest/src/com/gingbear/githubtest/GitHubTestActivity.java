@@ -70,7 +70,8 @@ public class GitHubTestActivity extends CustomActivity implements OnClickListene
         TextView textView1 = (TextView)findViewById(R.id.textView1);
         textView1.setText(WifiChange.getWifiState(this));
         
-        
+//        loadApplicationInfo();
+        getPermissions();
 //        this.setC2DM((TextView)findViewById(R.id.c2dm));
     }
 
