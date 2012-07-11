@@ -20,7 +20,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.Manifest;
 
+import com.google.android.c2dm.*;
 
 /**
  * 参考サイト
@@ -30,6 +32,75 @@ import android.widget.ListView;
 public class CustomPackageManager {
 	public static final String LOG_TAG = "CustomPackageManager";
 
+	/**
+	 * permissionの説明文を返す。
+	 * @param string
+	 * @return
+	 */
+public static String testest(String string){
+	String sting = Manifest.permission.ACCESS_WIFI_STATE;
+	if(string.equals(sting))
+		return "Wifi の ON/OFF の検知と変更";
+	sting = Manifest.permission.CHANGE_WIFI_STATE;
+	if(string.equals(sting))
+		return "Wifi の ON/OFF の検知と変更";
+	
+   //<!-- Android端末各種情報取得 -->
+	sting = Manifest.permission.READ_PHONE_STATE; 
+	if(string.equals(sting))
+		return "Android端末各種情報取得";
+	
+   // <!-- ネットワーク接続状態の検知 -->
+	sting = Manifest.permission.ACCESS_NETWORK_STATE;
+	if(string.equals(sting))
+		return "ネットワーク接続状態の検知";
+	
+   // <!-- インターネット利用 -->
+	sting = Manifest.permission.INTERNET;
+	if(string.equals(sting))
+		return "インターネット利用";
+	
+   // <!-- GPSの利用権限 （LocationManager.GPS_PROVIDER利用時） -->
+	sting = Manifest.permission.ACCESS_FINE_LOCATION;
+	if(string.equals(sting))
+		return "GPSの利用権限 （LocationManager.GPS_PROVIDER利用時）";
+	
+   // <!-- ネットワークによる位置取得の利用権限 （LocationManager.NETWORK_PROVIDER利用時） -->
+	sting = Manifest.permission.ACCESS_COARSE_LOCATION;
+	if(string.equals(sting))
+		return "ネットワークによる位置取得の利用権限 （LocationManager.NETWORK_PROVIDER利用時）";
+	
+  //  <!-- エミュレータにてGPSを利用する場合の権限 -->
+	sting = Manifest.permission.ACCESS_MOCK_LOCATION;
+	if(string.equals(sting))
+		return "エミュレータにてGPSを利用する場合の権限 ";
+	
+
+  //  <!-- バッテリー -->
+	sting = Manifest.permission.BATTERY_STATS;
+//    <!-- BLUETOOTH -->
+	sting = Manifest.permission.BLUETOOTH;
+
+//<!-- このアプリケーションだけがメッセージの受信と登録の結果の受信が可能 --> 
+	sting = com.google.android.c2dm.C2DMBaseReceiver.REGISTRATION_CALLBACK_INTENT;
+	
+  //  <permission
+   //     android:name="com.gingbear.githubtest.permission.C2D_MESSAGE"
+  //      android:protectionLevel="signature" />
+
+//<!-- アカウント情報を取得 --> 
+	sting = Manifest.permission.GET_ACCOUNTS;
+ //   <uses-permission android:name="com.gingbear.githubtest.permission.C2D_MESSAGE;
+    		sting = Manifest.permission.RECEIVE_BOOT_COMPLETED;
+//<!-- このアプリケーションは登録とメッセージ受信の許可がある -->
+  //  <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE;
+//<!-- このアプリケーションは登録とメッセージ受信の許可がある -->
+    		sting = Manifest.permission.INTERNET;
+	sting = Manifest.permission.WAKE_LOCK;
+	sting = Manifest.permission.ACCESS_NETWORK_STATE;
+	
+	return "";
+}
 	/**
 	 * すべてのpermissionを列挙する
 	 */
@@ -87,17 +158,17 @@ public class CustomPackageManager {
 		Arrays.sort(allPerms);
 
 		for (int i = 0; i < appPerms.length; ++i) {
-			CustomLog.v(LOG_TAG, appPerms[i]);
+			CustomLog.v(LOG_TAG, appPerms[i] + "," + testest(appPerms[i]));
 
 		}
 	}
 	
 	
-    private void checkInstalledApplication( String fileter ){
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>( this, android.R.layout.simple_list_item_1 );
+    private void checkInstalledApplication( String fileter , Context context){
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>( context, android.R.layout.simple_list_item_1 );
         //ArrayAdapter<ImageView> images = new ArrayAdapter<ImageView>( this, android.R.layout.simple_list_item_1 );
 
-		PackageManager pm = getPackageManager();
+		PackageManager pm = context.getPackageManager();
 		int flag = PackageManager.GET_INTENT_FILTERS | PackageManager.GET_RECEIVERS | PackageManager.GET_PERMISSIONS;
 		List<PackageInfo> list = pm.getInstalledPackages( flag  );
 		for( Iterator<PackageInfo> iterator = list.iterator(); iterator.hasNext(); ){
