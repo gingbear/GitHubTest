@@ -2,6 +2,7 @@ package com.gingbear.githubtest;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Enumeration;
 import java.util.List;
 
 import com.gingbear.githubtest.receiver.C2DMReceiver;
@@ -29,6 +30,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import java.util.UUID;
 import java.lang.reflect.Field;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
 
 public class CustomActivity extends Activity  {
     public Handler mH;
@@ -282,5 +286,49 @@ public class CustomActivity extends Activity  {
 	        	
 	        }
 	}
+	public void setNetworkInterface(){
+    	Enumeration<NetworkInterface> netIFs;
+        try {
+            netIFs = NetworkInterface.getNetworkInterfaces();
+            while( netIFs.hasMoreElements() ) {
+                NetworkInterface netIF = netIFs.nextElement();
+                CustomLog.v(LOG_TAG, "Name            : " + netIF.getName());
+                CustomLog.v(LOG_TAG, "Display name    : " + netIF.getDisplayName());
+//                CustomLog.v(LOG_TAG, "Hardware address: " + String.substring(netIF.getHardwareAddress()));
+                Enumeration<InetAddress> ipAddrs = netIF.getInetAddresses();
+                while( ipAddrs.hasMoreElements() ) {
+                    InetAddress ip = ipAddrs.nextElement();
+                    if( ! ip.isLoopbackAddress() ) {
+//                        return ip.getHostAddress().toString();
+                    }
+                }
+            }
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
+	}
 	
+/**
+ * IPアドレスの取得
+ * @return
+ */
+    public String getIpAddress() {
+    	Enumeration<NetworkInterface> netIFs;
+        try {
+            netIFs = NetworkInterface.getNetworkInterfaces();
+            while( netIFs.hasMoreElements() ) {
+                NetworkInterface netIF = netIFs.nextElement();
+                Enumeration<InetAddress> ipAddrs = netIF.getInetAddresses();
+                while( ipAddrs.hasMoreElements() ) {
+                    InetAddress ip = ipAddrs.nextElement();
+                    if( ! ip.isLoopbackAddress() ) {
+                        return ip.getHostAddress().toString();
+                    }
+                }
+            }
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

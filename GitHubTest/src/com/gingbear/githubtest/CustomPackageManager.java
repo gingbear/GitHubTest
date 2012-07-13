@@ -187,23 +187,23 @@ public static String testest(String string){
 		}
 
 
-        ListView listView = (ListView)findViewById( R.id.listView1 );
-        listView.setAdapter( adapter );
+//        ListView listView = (ListView)findViewById( R.id.listView1 );
+//        listView.setAdapter( adapter );
         //listView.setAdapter( images );
 
  
         // リストビューのアイテムがクリックされた時に呼び出されるコールバックリスナーを登録します
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ListView listView = (ListView) parent;
-                // クリックされたアイテムを取得します
-                String item = (String) listView.getItemAtPosition(position);
-                
-                Intent intent = new Intent( getApplicationContext(), PackageInfoActivity.class );
-                intent.putExtra( "TEST", item );
-                startActivity( intent );
-            }
-        });
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                ListView listView = (ListView) parent;
+//                // クリックされたアイテムを取得します
+//                String item = (String) listView.getItemAtPosition(position);
+//                
+//                Intent intent = new Intent( getApplicationContext(), PackageInfoActivity.class );
+//                intent.putExtra( "TEST", item );
+//                startActivity( intent );
+//            }
+//        });
  
         /*
         // リストビューのアイテムが選択された時に呼び出されるコールバックリスナーを登録します
@@ -224,6 +224,7 @@ public static String testest(String string){
     	
     }
   //===================================================================================
+/*
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.package_info);
@@ -316,7 +317,7 @@ public static String testest(String string){
 			e.printStackTrace();
 		}
     }
-    
+  */  
 	private void putInfo( MyStringBuilder str, InstrumentationInfo info[], String title ) {
 		if( info == null ){
 			return;
