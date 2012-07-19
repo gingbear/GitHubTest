@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,17 +61,21 @@ public class GitHubTestActivity extends CustomActivity implements OnClickListene
         CustomLocation location = new CustomLocation();
         location.create(this, location);
         
-
+        setNetworkInterface();
         TextView textViewmacaddress = (TextView)findViewById(R.id.macaddress);
         textViewmacaddress.setText(getMacAddress());
         TextView textViewdeviceid = (TextView)findViewById(R.id.deviceid);
         textViewdeviceid.setText(getDeviceId());
         
 
-        TextView textView1 = (TextView)findViewById(R.id.textView1);
+        TextView textView1 = (TextView)findViewById(R.id.textView2);
         textView1.setText(WifiChange.getWifiState(this));
-        
-        
+//        EditText wifiview = (EditText)findViewById(R.id.editText2);
+//        wifiview.setText(WifiChange.getWifiState(this));
+        TextView ipview = (TextView)findViewById(R.id.ipview);
+        ipview.setText(getIpAddress());
+//        loadApplicationInfo();
+        getPermissions();
 //        this.setC2DM((TextView)findViewById(R.id.c2dm));
     }
 
@@ -79,7 +84,7 @@ public class GitHubTestActivity extends CustomActivity implements OnClickListene
 	// TODO Auto-generated method stub
 	super.onStop();
 	// Listenerの登録解除
-//event.onStop();
+event.onStop();
 	}
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
@@ -105,7 +110,7 @@ public class GitHubTestActivity extends CustomActivity implements OnClickListene
     @Override
     protected void onResume() {
         super.onResume();
-//        event.onResume();
+        event.onResume();
 //        Battery.getInstance().registerReceiver(this);
     }
     @Override

@@ -75,12 +75,26 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/deviceid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Large Text"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="IMEI:"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/deviceid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="IMEIView"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textView2"
@@ -88,12 +102,37 @@
         android:layout_height="wrap_content"
         android:text="TextView" />
 
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPostalAddress" />
+
     <TextView
         android:id="@+id/message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="IP:" />
+
+        <TextView
+            android:id="@+id/ipview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="IPview" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textView1"
