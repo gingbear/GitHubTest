@@ -97,19 +97,19 @@ public class WifiChange {
 		switch (wifiState) {
 		case WifiManager.WIFI_STATE_DISABLING:// 「使用不可にする」をしている状態
 			CustomLog.v("WifiState", "WIFI_STATE_DISABLING");
-		    break;
+			return "「使用不可にする」をしている状態";
 		case WifiManager.WIFI_STATE_DISABLED://使用不可
 			CustomLog.v("WifiState", "WIFI_STATE_DISABLED");
-		    break;
+			return "使用不可";
 		case WifiManager.WIFI_STATE_ENABLING:// 「使用可能にする」をしている状態
 			CustomLog.v("WifiState", "WIFI_STATE_ENABLING");
-		    break;
+			return "「使用可能にする」をしている状態";
 		case WifiManager.WIFI_STATE_ENABLED:// 使用可能
 			CustomLog.v("WifiState", "WIFI_STATE_ENABLED");
-		    break;
+			return "使用可能";
 		case WifiManager.WIFI_STATE_UNKNOWN:
 			CustomLog.v("WifiState", "WIFI_STATE_UNKNOWN");
-		    break;
+			return "不明";
 		}
 		return "";
 	}
