@@ -69,7 +69,7 @@ public class CustomActivity extends Activity  {
 	}
 	public void startC2DM(){
 		C2DMReceiver.setParam(CustomActivity.this, getString(R.string.googleId));
-        C2DMessaging.register(CustomActivity.this, this.getAccount(CustomActivity.this, 1).name);
+        C2DMessaging.register(CustomActivity.this, this.getAccount(CustomActivity.this, 0).name);
         //       C2DMessaging.register(this, "この端末利用者のGoogleアカウントID");
 	}
 	public void stopC2DM(){

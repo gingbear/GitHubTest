@@ -76,7 +76,7 @@ public class GitHubTestActivity extends CustomActivity implements OnClickListene
         ipview.setText(getIpAddress());
 //        loadApplicationInfo();
         getPermissions();
-//        this.setC2DM((TextView)findViewById(R.id.c2dm));
+        this.setC2DM((TextView)findViewById(R.id.c2dm));
     }
 
 	@Override
@@ -99,6 +99,8 @@ event.onStop();
 		} else if(v.getId() == R.id.button4){
 			// C2DMサーバーへ登録リクエスト
 			startC2DM();
+	        TextView textView1 = (TextView)findViewById(R.id.c2dm);
+	        textView1.setText("C2DMサーバーへ登録リクエスト");
 			CustomToast.makeText(this, "C2DMサーバーへ登録リクエスト", Toast.LENGTH_LONG).show();
 		} else if(v.getId() == R.id.button5){
 			// C2DMサーバーへ解除リクエスト
