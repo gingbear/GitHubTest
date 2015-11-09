@@ -4,3 +4,5 @@ GitHubTest/.classpath
 GitHubTest/.project
 GitHubTest/res/values/secret.xml
 
+test*
+
