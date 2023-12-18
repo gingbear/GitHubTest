@@ -13,3 +13,7 @@ jobs:
     steps:
       - name: echo
         run: echo ${{ github.head_ref  }}
+
+      - name: test
+        run: echo ${{ github.ref_name  }}
+
