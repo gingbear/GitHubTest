@@ -1,0 +1,15 @@
+name: pull_request_test
+
+on:
+  pull_request:
+    branches:
+      - master
+    types: [closed]
+
+jobs:
+  pull_request_test:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+    runs-on: ubuntu_latest
+    steps:
+      - name: echo
+        run: echo ${{ github.head_ref  }}
