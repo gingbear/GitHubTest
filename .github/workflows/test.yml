@@ -19,6 +19,6 @@ jobs:
         id: test_value
 
       - name: test
-        if: steps.test_value.outputs.test_value == 'test_value'
+        if: steps.test_value.outputs.test_value != 'test_value' && steps.test_value.outputs.test_value != ''
         run: echo ${{ steps.test_value.outputs.test_value  }}
 
