@@ -15,7 +15,7 @@ jobs:
         run: echo ${{ github.head_ref  }}
 
       - name: set value
-        run: echo "test_value=test_value" >> $GITHUB_OUTPUT
+        run: echo "test_value=run_step" >> $GITHUB_OUTPUT
         id: test_value
 
       - name: test
