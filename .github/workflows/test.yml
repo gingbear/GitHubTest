@@ -14,6 +14,11 @@ jobs:
       - name: echo
         run: echo ${{ github.head_ref  }}
 
+      - name: set value
+        run: echo "test_value=test_value" >> $GITHUB_OUTPUT
+        id: test_value
+
       - name: test
-        run: echo ${{ github.ref_name  }}
+        if: steps.test_value.outputs.test_value == 'test_value'
+        run: echo ${{ steps.test_value.outputs.test_value  }}
 
